@@ -1,3 +1,6 @@
+this project has two endpoints: /cars/x
+and /publish
+
 ------------------------Lombok----------------------
 
 @Getter @Setter @NoArgsConstructor
