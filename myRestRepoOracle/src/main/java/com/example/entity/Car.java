@@ -1,9 +1,14 @@
 package com.example.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
+@Getter @Setter @NoArgsConstructor
 public class Car {
 
     @Id
@@ -11,27 +16,8 @@ public class Car {
 
     private String model;
 
-    public Car() {
-    }
-
     public Car(Long id, String model) {
         this.id = id;
-        this.model = model;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
         this.model = model;
     }
 }

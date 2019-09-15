@@ -42,6 +42,7 @@ public class RepoIntegrationTests {
         userRepository.save(u);
     }
     @Test
+
     public void testFind(){
         BigInteger b=new BigInteger("33");
 
