@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +31,7 @@ public class KafkaProducer {
     }
 
     @RequestMapping("/add?{msg}")
-    public void send_msg(@RequestParam String msg) {
+    public void send_msg(@PathVariable String msg) {
         send("test", msg);
     }
 

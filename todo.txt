@@ -1,0 +1,13 @@
+
+  good source:https://hellokoding.com/spring-boot-tutorial-series/
+
+- complete view (spring security + jsp )+@Valid
+
+- add log center
+
+- check actuator
+
+- add connections between services (config, discovery)
+
+- complete repo names in github like https://github.com/hellokoding
+
