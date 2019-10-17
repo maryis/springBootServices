@@ -8,6 +8,51 @@ projects deps:
 
 -----------------spring validation form------------------
 if I used springframework.validator, then I have to use spring tag libraries in jsp file.
-as I prefer usinf pure jstl tags, I ignored this sections.
----------------------------------------------------------
+as I prefer using pure jstl tags, I ignored this sections.
 
+--------------@requestBody vs @@ModelAttribute-------------------
+You can't use form-data or x-www-form-urlencoded with @RequestBody, they are used when the binding is @ModelAttribute.
+@ModelAttribute : working in spring mvc with forms
+@requestBody : working in spring mvc with rest(json)
+@RequestParam :  working in spring mvc with url query
+@pathVariable :  working in spring mvc with url last part
+---------------------------@ResponseStatus----------------------------------
+in Spring @ResponseStatus marks a method or exception class with the status code and reason message that should be returned.
+ The status code is applied to the HTTP response when the handler method is invoked, or whenever the specified exception is thrown. 
+It overrides status information set by other means, like ResponseEntity or redirect:.
+---------------------------ResponseEntity----------------------------------
+in Spring ResponseEntity represents an HTTP response, including headers, body, and status. While @ResponseBody puts the return value
+ into the body of the response, ResponseEntity also allows us to add headers and status code.
+ in our mvc Controllers, we can return a ResponseEntity that contains every thing(we can set headers, body and status) to return data(not model)
+ somebody said do nou overuse it, user @responseBody and ResponseStatus instead
+-----------------Exception handling--------------------------
+Spring MVC offers no default (fall-back) error page out-of-the-box(in contrary to spring boot)
+The most common way to set a default error page has always been the SimpleMappingExceptionResolver
+At start-up, Spring Boot tries to find a mapping for /error
+If no view-resolver mapping for /error can be found, Spring Boot defines its own fall-back error page 
+- the so-called “Whitelabel Error Page” (a minimal page with just the HTTP status information and any error details
+
+three ways of exception handling in spring mvc:
+1-  define a method in controller class and use the annotation @ExceptionHandler on it. Spring configuration will detect 
+this annotation and register the method as exception handler for argument exception class and its subclasses.
+this method signature and its return type can be anything. Add one method handler per exception.
+2- Global exception handler: @ExceptionHandler on class  : @ControllerAdvice
+Add one method handler per exception.
+3- when a request is rejected by security framework, it does not reaches the MVC layer so @ControllerAdvice is not an option here.
+(for example when the user in login page is incorrect )
+   There are 3 interfaces in the Spring Security framework that may be of interest here:  
+   org.springframework.security.web.authentication.AuthenticationSuccessHandler
+   org.springframework.security.web.authentication.AuthenticationFailureHandler
+   org.springframework.security.web.access.AccessDeniedHandler
+   You can create implementations of each of these Interfaces in order to customize the response sent for various events:
+    successful login, failed login, attempt to access protected resource with insufficient permissions.
+    (good link:https://stackoverflow.com/questions/41140669/handle-security-exceptions-in-spring-boot-resource-server)
+-------------------actuator-----------------------------
+Spring Boot provides actuator to monitor and manage our application. Actuator is a tool which has HTTP endpoints. 
+when application is pushed to production, you can choose to manage and monitor your application using HTTP endpoints.
+Actuator endpoints allow us to monitor and interact with our Spring Boot application. 
+Spring Boot includes number of built-in endpoints (12 such as health, beans,..) and we can also add custom.
+* we can see all of them after running project in endpoints panel in Intellij *
+* I set actuator path=/actuator and I added it in security.permitAll to avoid redirecting to /login page
+
+ 

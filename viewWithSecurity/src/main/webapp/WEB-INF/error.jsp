@@ -7,7 +7,6 @@ Date: ${DATE}
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>welcome</title>
@@ -15,14 +14,20 @@ Date: ${DATE}
 </head>
 <body>
 <div class="container">
-    <form action="/register" class="form-control">
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <h2 class="text-center text-danger" type="">
-                access denied
-                <a href="/logout" >logout</a>
-            </h2>
-        </c:if>
-    </form>
+    <p>
+        Error : contact SB
+    </p>
+        <p>
+    Status: ${pageContext.response.status}: Error:${error} - Message:${message}</p>
+
+    <!--
+    Failed URL: ${pageContext.request.requestURL}
+    Exception:  ${pageContext.exception.message}
+
+        <c:forEach items="${pageContext.exception.stackTrace}" var="ste">
+         ${ste}
+    </c:forEach>
+  -->
 </div>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 

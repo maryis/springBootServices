@@ -17,9 +17,9 @@
 
     <form action="/register" class="form-control" method="post">
         <h2 class="text-info">Create your account</h2>
-        <input name="username" type="text" class="form-control">
-        <input name="password" type="password" class="form-control">
-        <input name="passordConfirm" type="password" class="form-control">
+        <input name="username" placeholder="username" type="text" class="form-control">
+        <input name="password" placeholder="password" type="password" class="form-control">
+        <input name="passConfirm" placeholder="repeat pass" type="password" class="form-control">
         <button  class="btn btn-block " type="submit">create</button>
     </form>
 

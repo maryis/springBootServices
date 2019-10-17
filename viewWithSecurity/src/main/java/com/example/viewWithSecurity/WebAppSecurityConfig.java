@@ -1,7 +1,9 @@
 package com.example.viewWithSecurity;
 
+import com.example.viewWithSecurity.exception.AuthFailureHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -20,6 +23,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 
 public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
+
 
     @Qualifier("userDetailsServiceImp")
     @Autowired
@@ -58,7 +62,7 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/register").permitAll()
+                .antMatchers("/actuator/**","/register","/error").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -66,19 +70,24 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .defaultSuccessUrl("/", true)
                 .failureUrl("/error")
+                .failureHandler(authenticationFailureHandler())
                 .and()
                 .logout()
                 .permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/WEB-INF/accessDenied.jsp")
                 //always use following codes to get detailed error instead of 403:forbidden
-                .and()
+                //if we set /error, no detailed error page(whiteable..) has been seen
                 .cors()
                 .and()
                 .csrf().disable();
     }
 
+
     @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new AuthFailureHandler();
+    }
+        @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManager();
     }

@@ -19,7 +19,10 @@ Date: ${DATE}
        <c:if test="${pageContext.request.userPrincipal.name != null}">
            <h2 class="text-center text-danger" type="">
                Welcome ${pageContext.request.userPrincipal.name}
+               <p>
+
                <a href="/logout" >logout</a>
+               </p>
            </h2>
        </c:if>
     </form>

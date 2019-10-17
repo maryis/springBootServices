@@ -18,13 +18,18 @@ Date: ${DATE}
     <form action="/login" method="post" class="form-control">
         <h2 class="text-info">Login</h2>
 
-        <input name="username" type="text" class="form-control">
-        <input name="password" type="password" class="form-control">
+        <input name="username" placeholder="username" type="text" class="form-control">
+        <input name="password" placeholder="password" type="password" class="form-control">
         <button value="login" class="btn btn-block " type="submit"  >login</button>
 
-        <h2 class="text-center">
+        <h1 class="text-center">
+            <p>
+            <a href="/chechexc" >To check Trowing customized error</a>
+            </p>
+            <p>
             <a href="/register" >Create an account</a>
-        </h2>
+            </p>
+        </h1>
     </form>
 </div>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

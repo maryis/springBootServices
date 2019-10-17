@@ -2,6 +2,7 @@ package com.example.viewWithSecurity.service;
 
 import com.example.viewWithSecurity.entity.Role;
 import com.example.viewWithSecurity.entity.User;
+import com.example.viewWithSecurity.exception.UserNotFoundException;
 import com.example.viewWithSecurity.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,10 +24,10 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String userName) {
+    public UserDetails loadUserByUsername(String userName) throws UserNotFoundException {
 
         User user = userRepo.findByUsername(userName);
-        if (user == null) throw new UsernameNotFoundException(userName);
+        if (user == null) throw new UserNotFoundException("USER NOT FOUND:"+userName);
 
         Set<GrantedAuthority> grantedAuthoritySet=new HashSet<>();
         for(Role r : user.getRoleSet()){
@@ -35,3 +36,4 @@ public class UserDetailsServiceImp implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),grantedAuthoritySet);
     }
 }
+

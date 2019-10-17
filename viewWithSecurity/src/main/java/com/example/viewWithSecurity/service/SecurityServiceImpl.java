@@ -44,5 +44,6 @@ public class SecurityServiceImpl implements SecurityService {
             SecurityContextHolder.getContext().setAuthentication(token);
             System.out.printf("auto login %s successful",username);
         }
+
     }
 }

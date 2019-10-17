@@ -1,6 +1,7 @@
 package com.example.viewWithSecurity.service;
 
 import com.example.viewWithSecurity.entity.User;
+import com.example.viewWithSecurity.exception.UserExistException;
 import com.example.viewWithSecurity.repository.RoleRepo;
 import com.example.viewWithSecurity.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,11 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void save(User user) {
+    public void save(User user) throws UserExistException {
 
+        User oldUser=findByUsername(user.getUsername());
+        if(oldUser!=null)
+            throw new UserExistException("A user with this name exist");
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoleSet(new HashSet<>(roleRepo.findAll()));
         user.setInsertDate(new Date());

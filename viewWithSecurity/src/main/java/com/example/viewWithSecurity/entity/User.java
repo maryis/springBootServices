@@ -7,6 +7,10 @@ import java.util.Set;
 @Entity
 @Table(name = "userTbl")
 public class User {
+    @Override
+    public String toString() {
+        return username+":"+password+":"+passConfirm+":"+insertDate;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
