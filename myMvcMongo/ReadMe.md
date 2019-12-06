@@ -52,6 +52,7 @@ RepoIntegrationTest2- @DataMongoTest , ... : It is not completed
 The annotation disables full auto-configuration and applies only configuration relevant to JPA tests. 
 By default, tests annotated with @DataJpaTest use an embedded in-memory database.
 @DataJPATest(@DataMongoTest,DataJDBCTest,...) by default will begin a new transaction before and roll back it after running a test method.
+it uses an in-mem db
  to implement integration test of the JPA and Hibernate data layer in Spring Boot
  it needs following dependency:
  <dependency>  
