@@ -1,3 +1,5 @@
+Read Good examples first
+
 with Spring Boot, Spring Security, Spring Data JPA, Hibernate, HSQL, JSP and Bootstrap.
 projects deps:
 - spring web 
@@ -25,7 +27,7 @@ in Spring ResponseEntity represents an HTTP response, including headers, body, a
  into the body of the response, ResponseEntity also allows us to add headers and status code.
  in our mvc Controllers, we can return a ResponseEntity that contains every thing(we can set headers, body and status) to return data(not model)
  somebody said do nou overuse it, user @responseBody and ResponseStatus instead
------------------Exception handling--------------------------
+----------------------------Exception handling--------------------------
 Spring MVC offers no default (fall-back) error page out-of-the-box(in contrary to spring boot)
 The most common way to set a default error page has always been the SimpleMappingExceptionResolver
 At start-up, Spring Boot tries to find a mapping for /error
@@ -48,11 +50,15 @@ Add one method handler per exception.
     successful login, failed login, attempt to access protected resource with insufficient permissions.
     (good link:https://stackoverflow.com/questions/41140669/handle-security-exceptions-in-spring-boot-resource-server)
 -------------------actuator-----------------------------
-Spring Boot provides actuator to monitor and manage our application. Actuator is a tool which has HTTP endpoints. 
+Spring Boot provides actuator to monitor and manage an application. Actuator is a tool which has HTTP endpoints. 
 when application is pushed to production, you can choose to manage and monitor your application using HTTP endpoints.
 Actuator endpoints allow us to monitor and interact with our Spring Boot application. 
 Spring Boot includes number of built-in endpoints (12 such as health, beans,..) and we can also add custom.
 * we can see all of them after running project in endpoints panel in Intellij *
 * I set actuator path=/actuator and I added it in security.permitAll to avoid redirecting to /login page
+the steps:
+- add actuator dep 
+the common endpoints such as health will be added by default, we can config others
+* for config-server and eureka-server actuator is enabled without adding dep explicitly
 
  

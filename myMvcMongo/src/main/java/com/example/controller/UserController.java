@@ -20,6 +20,8 @@ public class UserController implements ErrorController {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public List<User>  getAll(){
+
+
         return userRepository.findAll();
     }
 

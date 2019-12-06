@@ -48,7 +48,7 @@ public class UserController {
     public String getRegisterPage() {
         return "registration";
     }
-    @GetMapping("/chechexc")
+    @GetMapping("/checkexc")
     public String chechExceptionHanding() {
         throw new UserNotFoundException("to check exception handler");
     }

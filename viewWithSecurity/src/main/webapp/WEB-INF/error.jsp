@@ -18,7 +18,8 @@ Date: ${DATE}
         Error : contact SB
     </p>
         <p>
-    Status: ${pageContext.response.status}: Error:${error} - Message:${message}</p>
+    Status: ${pageContext.response.status}: Error:${error} - Message:${requestScope.message}</p> <!-- req attributes  -->
+    Status: ${pageContext.response.status}: Error:${error} - Message:${param.message}</p>  <!-- inputs in page  -->
 
     <!--
     Failed URL: ${pageContext.request.requestURL}

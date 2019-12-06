@@ -27,8 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@DataJpaTest
-public class RepoIntegrationTests {
+
+public class RepoIntegrationTest1 {
 
 
     @Autowired

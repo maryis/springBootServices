@@ -24,7 +24,7 @@ Date: ${DATE}
 
         <h1 class="text-center">
             <p>
-            <a href="/chechexc" >To check Trowing customized error</a>
+            <a href="/checkexc" >To check Trowing customized error</a>
             </p>
             <p>
             <a href="/register" >Create an account</a>

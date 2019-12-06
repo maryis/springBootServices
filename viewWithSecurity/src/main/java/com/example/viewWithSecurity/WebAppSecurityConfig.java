@@ -62,14 +62,14 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/actuator/**","/register","/error").permitAll()
+                .antMatchers("/actuator/**", "/register", "/error","/checkexc").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .defaultSuccessUrl("/", true)
-                .failureUrl("/error")
+                //.failureUrl("/error")
                 .failureHandler(authenticationFailureHandler())
                 .and()
                 .logout()
@@ -87,7 +87,8 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationFailureHandler authenticationFailureHandler() {
         return new AuthFailureHandler();
     }
-        @Bean
+
+    @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManager();
     }

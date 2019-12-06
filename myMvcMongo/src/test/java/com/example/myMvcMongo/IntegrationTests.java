@@ -35,9 +35,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc  //this two lines are good for integration test, because initial complete application context
 //or instead of two lines
-//@WebMvcTest(UserController.class)
+//@WebMvcTest(UserController.class): it is good for unit test of web layer
 
 public class IntegrationTests {
 
@@ -52,7 +52,7 @@ public class IntegrationTests {
     public void callGet() throws Exception {
         mockMvc.perform(get("/get"))
                 .andDo(print())
-                .andExpect(jsonPath("$",hasSize(3)))
+                .andExpect(jsonPath("$",hasSize(1)))
                 .andExpect(jsonPath("$[0].name",is("ali")));
 
     }

@@ -27,7 +27,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
     public UserDetails loadUserByUsername(String userName) throws UserNotFoundException {
 
         User user = userRepo.findByUsername(userName);
-        if (user == null) throw new UserNotFoundException("USER NOT FOUND:"+userName);
+        if (user == null) throw new UserNotFoundException("USER NOT FOUND: "+userName); //it does not go to mvc layer, so
 
         Set<GrantedAuthority> grantedAuthoritySet=new HashSet<>();
         for(Role r : user.getRoleSet()){
