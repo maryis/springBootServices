@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    def dirpath='$PWD'
+    dirpath=sh(script: 'pwd')
     stages{
         stage('package'){
             steps {
