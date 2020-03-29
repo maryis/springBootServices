@@ -3,8 +3,8 @@ pipeline {
     stages{
         stage('package'){
             steps {
-                sh 'cd configServer/'
-                sh 'mvn clean package'
+                sh 'cd configServer'
+                sh  'mvn -e clean package'
             }
         }
         stage('run'){
