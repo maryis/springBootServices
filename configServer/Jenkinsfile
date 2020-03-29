@@ -4,14 +4,15 @@ pipeline {
         stage('package'){
             steps {
                 sh  'mvn clean package --file configServer/pom.xml'
-                sh 'echo $PWD'
+                sh 'echo iiiiiiiiiiiii:$PWD'
             }
         }
         stage('run'){
             agent{
                 dockerfile {
+                    customWorkspace '/configServer'
         		    filename 'Dockerfile' // optional because file name is standars
-        		    dir '.' //if dockerfile is not in root
+        		    dir 'configServer' //if dockerfile is not in root
         		    additionalBuildArgs  '--build-arg version=1.0'
         		    args '-t my-config-server'
     		    }
