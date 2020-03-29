@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('package'){
             steps {
-                sh  'mvn clean package --file configServer/*.pom'
+                sh  'mvn clean package --file configServer/pom.xml'
             }
         }
         stage('run'){
