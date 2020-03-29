@@ -19,7 +19,7 @@ pipeline {
                     dir 'configServer' //if dockerfile is not in root
                     additionalBuildArgs  '--build-arg path=${dpath}'
         		    args '-t my-config-server'
-                    customWorkspace "${dpath}/configServer"
+                    customWorkspace "${dpath}"
                 }
             }
             steps{
