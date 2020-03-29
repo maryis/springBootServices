@@ -22,7 +22,7 @@ pipeline {
                 }
             }*/
             steps{
-                sh 'docker build -t my-config-server:1.0 -f ./configServer/Dockerfile .
+                sh 'docker build -t my-config-server:1.0 -f ./configServer/Dockerfile .'
                 sh 'echo End of running configServer'
 
             }
