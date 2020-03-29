@@ -11,7 +11,7 @@ pipeline {
             agent{
                 dockerfile {
         		    filename 'Dockerfile' // optional because file name is standars
-        		    dir 'configServer' //if dockerfile is not in root
+        		    dir '.' //if dockerfile is not in root
         		    additionalBuildArgs  '--build-arg version=1.0'
         		    args '-t my-config-server'
     		    }
