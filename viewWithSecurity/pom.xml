@@ -27,10 +27,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-web</artifactId>-->
-		<!--</dependency>-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -43,18 +44,21 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
+		<dependency><!--for jsp-->
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
+		<!--HSQLDB (Hyper SQL Database) is a relational database management system written in Java. It has a JDBC driver and supports
+		a large subset of SQL-92, SQL:2008, and SQL:2011 standards.
+		It offers a fast, small (around 1300 kilobytes in version 2.2) database engine which offers both in-memory and disk-based tables.
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
+-->
 
 		<dependency>
 			<groupId>javax.servlet</groupId>

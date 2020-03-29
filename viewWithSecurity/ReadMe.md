@@ -8,26 +8,27 @@ projects deps:
 - tomcat-embed-jasper : for jsp
 - oracle driver 
 
------------------spring validation form------------------
+-----------------spring validation form------------------------------------
 if I used springframework.validator, then I have to use spring tag libraries in jsp file.
 as I prefer using pure jstl tags, I ignored this sections.
 
---------------@requestBody vs @@ModelAttribute-------------------
+--------------@requestBody vs @@ModelAttribute-----------------------------
 You can't use form-data or x-www-form-urlencoded with @RequestBody, they are used when the binding is @ModelAttribute.
 @ModelAttribute : working in spring mvc with forms
+
 @requestBody : working in spring mvc with rest(json)
-@RequestParam :  working in spring mvc with url query
+@RequestParam :  working in spring mvc with url query 
 @pathVariable :  working in spring mvc with url last part
 ---------------------------@ResponseStatus----------------------------------
 in Spring @ResponseStatus marks a method or exception class with the status code and reason message that should be returned.
  The status code is applied to the HTTP response when the handler method is invoked, or whenever the specified exception is thrown. 
 It overrides status information set by other means, like ResponseEntity or redirect:.
----------------------------ResponseEntity----------------------------------
+---------------------------ResponseEntity-----------------------------------
 in Spring ResponseEntity represents an HTTP response, including headers, body, and status. While @ResponseBody puts the return value
  into the body of the response, ResponseEntity also allows us to add headers and status code.
  in our mvc Controllers, we can return a ResponseEntity that contains every thing(we can set headers, body and status) to return data(not model)
  somebody said do nou overuse it, user @responseBody and ResponseStatus instead
-----------------------------Exception handling--------------------------
+----------------------------Exception handling------------------------------
 Spring MVC offers no default (fall-back) error page out-of-the-box(in contrary to spring boot)
 The most common way to set a default error page has always been the SimpleMappingExceptionResolver
 At start-up, Spring Boot tries to find a mapping for /error
@@ -60,5 +61,29 @@ the steps:
 - add actuator dep 
 the common endpoints such as health will be added by default, we can config others
 * for config-server and eureka-server actuator is enabled without adding dep explicitly
+---------------------------RestTemplate-------------------------------------
+to consume restful services :
+RestTemplate is a synchronous client to perform HTTP requests. It offers templates for common scenarios for each HTTP method, 
+in addition to the generalized exchange(...) and execute(...) methods that support less frequent cases.
 
- 
+postForEntity,getForEntity,getForObject,PostForObject,...
+Create a new resource via POST and return the representation from the response.
+------
+exchange
+More generalized, and less opinionated version, of the above methods that provides extra flexibility when needed. 
+It accepts RequestEntity, including HTTP method, URL, headers, and body as input, and returns a ResponseEntity.
+These methods allow the use of ParameterizedTypeReference instead of Class to specify a response type with generics.
+--------
+execute
+The most generalized way to perform a request, with full control over request preparation and response extraction via callback interfaces.
+-------------
+RestTemplate methods with more details:
+getForObject() : It retrieves an entity using HTTP GET method on the given URL.
+exchange() : Executes the HTTP method for the given URI. It returns ResponseEntity. It can communicate using any HTTP method.
+headForHeaders() : Retrieves all headers. It uses HTTP HEAD method.
+getForEntity() : It retrieves an entity by using HTTP GET method for the given URL. It returns ResponseEntity.
+delete() : Deletes the resources at the given URL. It uses HTTP DELETE method.
+put(): It creates new resource or update for the given URL using HTTP PUT method.
+postForObject(): It creates new resource using HTTP POST method and returns an entity.
+postForLocation(): It creates new resource using HTTP POST method and returns the location of created new resource.
+postForEntity(): It creates news resource using HTTP POST method to the given URI template. It returns ResponseEntity.

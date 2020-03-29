@@ -3,7 +3,7 @@ that is created automatically by  @RepositoryRestResource
 ------------------------Lombok----------------------
 
 @Getter @Setter @NoArgsConstructor
-
+notice: in addition to adding lombok dep, we should install lombok plugin in intellij
 only get the data when the corresponding getter is called the first time. This is called lazy-loading:
 @Getter(lazy = true)
     private final Map<String, Long> transactions = readTxnsFromFile();

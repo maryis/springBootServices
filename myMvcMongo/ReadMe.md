@@ -1,4 +1,4 @@
---------------Eureka client--------------------------
+ --------------Eureka client--------------------------
 read red notebook page 9 aban
 Eureka is a REST (Representational State Transfer) based service that is primarily used in the AWS cloud for locating
  services for the purpose of load balancing and failover of middle-tier servers. We call this service, the Eureka Server.
@@ -41,7 +41,11 @@ to test web layer, there is 2 ways:
 or
 2- @WebMvcTest(UserController.class)
 in first way, all spring application context loads while in second way just UserController bean injects in context and we use
-mock for other layers.
+mock for other layers. in the second:
+ Spring MVC components.
+Using this annotation will disable full auto-configuration and instead apply only configuration relevant to MVC tests (i.e. @Controller, @ControllerAdvice, @JsonComponent, Converter/GenericConverter, Filter, WebMvcConfigurer and HandlerMethodArgumentResolver beans but not @Component, @Service or @Repository beans).
+
+By default, tests annotated with @WebMvcTest will also auto-configure Spring Security and MockMvc
 
 to test repo layer, there is 2 ways:
 RepoIntegrationTest1- @SpringBootTest 
@@ -60,3 +64,5 @@ it uses an in-mem db
      <artifactId>hsqldb</artifactId>
      <scope>test</scope>
  </dependency>  
+
+** The context is always cached between tests if it is the same configuration. Configuration is determined on loaded configuration files, @MockBean (and friends), @TestPropertySource and some other things. If that is what you use then you will get a new context each time.  

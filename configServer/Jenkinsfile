@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages{
+        stage('package'){
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('run'){
+            agent{
+                dockerfile {
+        		    filename 'Dockerfile' // optional because file name is standars
+        		    // dir 'build' if dockerfile is not in root
+        		    additionalBuildArgs  '--build-arg version=1.0'
+        		    args '-t my-config-server'
+    		    }
+            }
+            steps{
+                sh 'echo End'
+
+            }
+
+        }
+    }
+}
