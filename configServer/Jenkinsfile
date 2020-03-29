@@ -13,9 +13,9 @@ pipeline {
         stage('run'){
             agent{
                 dockerfile {
-                    customWorkspace '/configServer'
+                    customWorkspace ${dirpath}
         		    filename 'Dockerfile' // optional because file name is standars
-                    dir ${dirpath}'/configServer' //if dockerfile is not in root
+                    dir 'configServer' //if dockerfile is not in root
         		    additionalBuildArgs  '--build-arg version=1.0'
         		    args '-t my-config-server'
                 }
