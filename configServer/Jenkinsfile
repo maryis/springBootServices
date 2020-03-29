@@ -6,8 +6,10 @@ pipeline {
         stage('package'){
             steps {
                 sh  'mvn clean package --file configServer/pom.xml'
-                dpath = sh(returnStdout: true, script: 'pwd')
+                        script {
 
+                dpath = sh(returnStdout: true, script: 'pwd')
+                        }
             }
         }
         stage('run'){
