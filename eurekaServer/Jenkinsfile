@@ -3,20 +3,20 @@ pipeline {
     stages{
         stage('package'){
             steps {
-                sh  'mvn clean package --file configServer/pom.xml'
+                sh  'mvn clean package --file eurekaServer/pom.xml'
             }
         }
         stage('run'){
             agent{
                 dockerfile {
         		    filename 'Dockerfile' // optional because file name is standars
-        		    dir 'configServer' //if dockerfile is not in root
+        		    dir 'eurekaServer' //if dockerfile is not in root
         		    additionalBuildArgs  '--build-arg version=1.0'
-        		    args '-t my-config-server'
+        		    args '-t my-eureka-server'
     		    }
             }
             steps{
-                sh 'echo End of running configServer'
+                sh 'echo End of running eurekaServer'
 
             }
 
