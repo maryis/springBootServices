@@ -12,6 +12,7 @@ pipeline {
             }
         }
         stage('run'){
+            /*
             agent{
                 dockerfile {
         		    filename 'Dockerfile' // optional because file name is standars
@@ -19,8 +20,9 @@ pipeline {
                     additionalBuildArgs  '--build-arg path=${dpath}'
         		    args '-t my-config-server'
                 }
-            }
+            }*/
             steps{
+                sh 'docker build -t my-config-server:1.0 -f ./configServer/Dockerfile .
                 sh 'echo End of running configServer'
 
             }
