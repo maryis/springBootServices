@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    def dirpath='$PWD'
     stages{
         stage('package'){
             steps {
@@ -9,13 +10,14 @@ pipeline {
         }
         stage('run'){
             agent{
+                dir(dirpath){
                 dockerfile {
                     customWorkspace '/configServer'
         		    filename 'Dockerfile' // optional because file name is standars
         		    dir 'configServer' //if dockerfile is not in root
         		    additionalBuildArgs  '--build-arg version=1.0'
         		    args '-t my-config-server'
-    		    }
+                }}
             }
             steps{
                 sh 'echo End of running configServer'
