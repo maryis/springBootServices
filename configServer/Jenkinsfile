@@ -12,7 +12,7 @@ pipeline {
                 dockerfile {
         		    filename 'Dockerfile' // optional because file name is standars
                     dir 'configServer' //if dockerfile is not in root
-                    additionalBuildArgs  '--build-arg version=1.0 path=${PWD}'
+                    additionalBuildArgs  '--build-arg path=${PWD}'
         		    args '-t my-config-server'
                 }
             }
