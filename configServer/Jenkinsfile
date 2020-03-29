@@ -9,8 +9,9 @@ pipeline {
             }
         }
         stage('run'){
-            agent{
                 dir(dirpath){
+
+            agent{
                 dockerfile {
                     customWorkspace '/configServer'
         		    filename 'Dockerfile' // optional because file name is standars
