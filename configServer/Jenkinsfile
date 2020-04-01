@@ -1,33 +1,7 @@
-pipeline {
-    agent any
-                            environment {
+I had problem with scm-pipeline in my jenkins
+I think the problem is that I installed jenkins as a container
+and as I need to build and run docker inside, I shared host docker
 
-                dpath = sh(returnStdout: true, script: 'pwd')
-                        }
-      stages{
-        stage('package'){
-            steps {
-                sh  'mvn clean package --file configServer/pom.xml'
-                sh 'echo ${dpath}'
-            }
-        }
-        stage('run'){
-            
-            agent{
-                dockerfile {
-        		    filename 'Dockerfile' // optional because file name is standars
-                    dir 'configServer' //if dockerfile is not in root
-                    additionalBuildArgs  '--build-arg path=${dpath}'
-        		    args '-t my-config-server'
-                    customWorkspace "${dpath}"
-                }
-            }
-            steps{
-             //   sh 'docker build -t my-config-server:1.0 -f ./configServer/Dockerfile .'
-                sh 'echo End of running configServer'
+I think installing jenkins outside container solves every thins easier
+and prevent re-downloading maven-packages
 
-            }
-
-        }
-    }
-}
