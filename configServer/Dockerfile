@@ -4,5 +4,5 @@
 
 FROM openjdk:8-jdk-alpine
 COPY configServer/target/*.jar /app.jar
-EXPOSE 8888:8888
+EXPOSE 8888
 ENTRYPOINT ["java","-jar","app.jar"]
