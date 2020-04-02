@@ -1,13 +1,16 @@
 pipeline {
     agent any
+                     environment {
 
+                dpath = sh(returnStdout: true, script: 'pwd')
+                        }
       stages{
 
         stage('run'){
             
             agent{
                 dockerfile {
-        		    filename 'Dockerfile' // optional because file name is standars
+        		    filename 'Dockerfile2' // optional because file name is standars
                     dir 'configServer' //if dockerfile is not in root
                     additionalBuildArgs  '--build-arg path=${dpath}'
         		    args '-t my-config-server'
