@@ -9,6 +9,6 @@ import java.math.BigInteger;
 @Repository
 public interface UserRepository extends MongoRepository<User, BigInteger> {
 
-    public User findTopById();
+    User findTopByName();
 
 }

@@ -31,11 +31,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-
 @RunWith(SpringRunner.class)
 
 @SpringBootTest
-@AutoConfigureMockMvc  //this two lines are good for integration test, because initial complete application context
+@AutoConfigureMockMvc  //this two lines are good for integration test, because initialize complete application context
 //or instead of two lines
 //@WebMvcTest(UserController.class)//: it is good for unit test of web layer, when there is no dep to button layers
 
