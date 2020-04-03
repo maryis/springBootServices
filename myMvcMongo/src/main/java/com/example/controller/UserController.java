@@ -29,7 +29,7 @@ public class UserController implements ErrorController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Optional<User> getAll(@PathVariable BigInteger id) {
+    public Optional<User> getById(@PathVariable BigInteger id) {
         return userRepository.findById(id);
     }
 

@@ -4,8 +4,10 @@ import com.example.controller.UserController;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -14,15 +16,20 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.client.RestTemplate;
+import org.w3c.dom.ls.LSInput;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.mockito.Mockito.when;
@@ -30,13 +37,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-
-@SpringBootTest
-@AutoConfigureMockMvc  //this two lines are good for integration test, because initialize complete application context
-//or instead of two lines
-//@WebMvcTest(UserController.class)//: it is good for unit test of web layer, when there is no dep to button layers
+//just load web layer
+@WebMvcTest(UserController.class)//: it is good for unit test of web layer, when there is no dep to button layers
 
 public class ControllerUnitTests {
 
@@ -51,39 +56,44 @@ public class ControllerUnitTests {
     //using this mock does not help, because the bean that is injected in context should be mocked
 //    private UserRepository userRepository;
 
-
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    public void callGet() throws Exception {
-        BigInteger id = new BigInteger("5");
+    private final List<User> list=new ArrayList<>();
+    private final User user1 = new User(new BigInteger("1"), "zsd", "abc1");
+    private final User user2 = new User(new BigInteger("2"), "zsd", "abc2");
 
-        List<User> list = Arrays.asList(new User(id, "ali66", "hello"));
+    @Before
+    public void setup(){
+        list.add(user1);
+
+    }
+
+    @Test
+    public void callGetAllUsers() throws Exception {
+
 
         when(userRepository.findAll()).thenReturn(list);
 
-        mockMvc.perform(get("/get"))
+        mockMvc.perform(get("/users/"))
                 .andDo(print())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].name", is("ali66")));
+                .andExpect(jsonPath("$[0].name", is(user1.getName())));
 
     }
 
     @Test
     public void call_post() throws Exception {
 
-        BigInteger id = new BigInteger("51");
-        User user = new User(id, "reza1", "rahmani1");
+        Mockito.when(userRepository.save(ArgumentMatchers.any())).thenReturn(user2);
 
-        Mockito.when(userRepository.save(user)).thenReturn(user);
-
-        mockMvc.perform(post("/add")
+        mockMvc.perform(post("/users/")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new ObjectMapper().writeValueAsString(user))
+                .content(new ObjectMapper().writeValueAsString(user2))
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(jsonPath("$.name", is("reza1")));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.family",is(user2.getFamily())));
 
     }
 

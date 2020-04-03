@@ -2,7 +2,10 @@ package com.example.myMvcMongo;
 
 import com.example.controller.UserController;
 import com.example.entity.User;
+import com.example.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hamcrest.CoreMatchers;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -34,12 +37,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 
-@SpringBootTest
+@SpringBootTest //load complete spring context
 @AutoConfigureMockMvc  //this two lines are good for integration test, because initial complete application context
-//or instead of two lines
-//@WebMvcTest(UserController.class): it is good for unit test of web layer
 
-public class IntegrationTests {
+public class ControllerIntegrationTest {
 
 //	@Autowired
 //	private TestRestTemplate restTemplate;
@@ -48,26 +49,38 @@ public class IntegrationTests {
     @Autowired
     private MockMvc mockMvc;
 
+
+    @Autowired
+    private UserRepository userRepository;
+
+    private final User user1 = new User(new BigInteger("1"), "zsd", "abc1");
+    private final User user2 = new User(new BigInteger("2"), "zsd", "abc2");
+
+    @Before
+    public void setUp() {
+
+        userRepository.save(user1);
+    }
+
+    //when output is list, to get data use $[n].name
+    //when output is single user, to get data use $.name
     @Test
-    public void callGet() throws Exception {
-        mockMvc.perform(get("/get"))
+    public void callGetbyId() throws Exception {
+        mockMvc.perform(get("/users/"+user1.getId()))
                 .andDo(print())
-                .andExpect(jsonPath("$",hasSize(1)))
-                .andExpect(jsonPath("$[0].name",is("ali")));
+                .andExpect(jsonPath("$.family", CoreMatchers.is("abc1")));
 
     }
 
     @Test
     public void call_post() throws Exception {
 
-        BigInteger id=new BigInteger("5");
-        User user=new User(id,"reza","rahmani");
-
-        mockMvc.perform(post("/add")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(new ObjectMapper().writeValueAsString(user))
-        .accept(MediaType.APPLICATION_JSON))
-                    .andDo(print());
+        mockMvc.perform(post("/users/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(user2))
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(jsonPath("$.name",CoreMatchers.is(user2.getName())));
 
     }
 
