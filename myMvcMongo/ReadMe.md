@@ -14,6 +14,13 @@ application.properties
 note: eureka server just shows registered services, when we stop the registered service, it is not removed from service lists until 
 we restart eureka server. 
 
+** when we run eureka servers on containers do not use localhost in client
+Since its running in docker, don't use localhost. Docker compose lets you refer to container names.
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://registration:1111/eureka
+
 
 ----------------spring boot test----------------------
 The spring-boot-starter-test “Starter” (in the test scope) contains the following provided libraries:
