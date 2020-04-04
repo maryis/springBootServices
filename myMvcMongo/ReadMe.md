@@ -49,10 +49,14 @@ and to have an object from service layer, we can not use @Autowired, instead def
 
 -to test repo layer, there is no need to complete spring context(do not use @SpringBootTest). use:
  @DataMongoTest 
- @DataJpaTest ..
+ @DataJpaTest (read *** section)
  with @Runwith(Springrunner.class)
 The annotation disables full auto-configuration and applies only configuration relevant to data tests. 
 
+***:
+By default @DataJpaTest uses embeded h2 databaze and ignores the connection string declared in application.properties. 
+Annotation @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) disables this behavior, 
+and db configured in application.properties will be used by @DataJpaTest test.
 
 ** The context is always cached between tests if it is the same configuration. 
 Configuration is determined on loaded configuration files, @MockBean (and friends), @TestPropertySource and some other things. 
