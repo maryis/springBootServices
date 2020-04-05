@@ -21,7 +21,6 @@ eureka:
     serviceUrl:
       defaultZone: http://registration:1111/eureka
 
-
 ----------------spring boot test----------------------
 The spring-boot-starter-test “Starter” (in the test scope) contains the following provided libraries:
 
