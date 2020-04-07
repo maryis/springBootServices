@@ -43,8 +43,7 @@ public class RepoIntegrationTest {
 
     @Test
     public void testFind(){
-        BigInteger b=new BigInteger("33");
-        Optional<User> u=userRepository.findById(b);
+        Optional<User> u=userRepository.findById(user1.getId());
         Assert.assertEquals("find user by id is not correct ",user1.getName(), u.get().getName());
 
     }

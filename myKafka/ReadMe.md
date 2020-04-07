@@ -1,7 +1,7 @@
 ---------------------------------------@Bean  @Component----------------------
 Spring @Bean annotation tells that a method produces a bean to be managed by the Spring container.
- It is a method-level annotation. During Java configuration (@Configuration), the method is executed 
- and its return value is registered as a bean within a BeanFactory.
+ It is a method-level annotation. During Java configuration (@Configuration), the method executed 
+ and its return value registered as a bean within a BeanFactory.
  it should be used in a class with @Configuration
  @SpringBootApplication === @Configuration, @EnableAutoConfiguration, and @ComponentScan.
  
@@ -42,5 +42,5 @@ commands(windows folder) --pdf-file
   kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning
 
 ----------------@EmbeddedKafka----------------
-this annotation is used to test kafka by an embedded kafka
-this embedded server get random port so we set 
+this annotation used to test kafka by an embedded kafka
+this embedded server get random port, so we set 
