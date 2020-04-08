@@ -8,3 +8,6 @@ java -jar /home/mary/projetcs/springBootServices/myRestRepoMySql/target/*.jar &
 
 java -jar /home/mary/projetcs/springBootServices/myMvcMongo/target/*.jar &
 
+java -jar /home/mary/projetcs/springBootServices/myKafla/target/*.jar &
+
+java -jar /home/mary/projetcs/springBootServices/zuulGateWay/target/*.jar &

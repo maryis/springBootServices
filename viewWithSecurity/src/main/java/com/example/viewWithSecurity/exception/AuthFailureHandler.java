@@ -40,10 +40,8 @@ public class AuthFailureHandler implements AuthenticationFailureHandler {
 
         //or
 
-        System.out.printf("\nhere   :  "+ex.toString());
-        System.out.printf("\nhere   :  "+request);
-        request.setAttribute("message", ex.toString()+"  :  zfgdfgsdfg");
-        request.getRequestDispatcher("/error").forward(request,response);
+        request.setAttribute("message", ex.toString());
+        request.getRequestDispatcher("WEB-INF/pages/error.jsp").forward(request,response);
     }
 
 

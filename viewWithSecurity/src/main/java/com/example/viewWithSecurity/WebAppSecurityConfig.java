@@ -3,7 +3,7 @@ package com.example.viewWithSecurity;
 import com.example.viewWithSecurity.exception.AuthFailureHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,13 +11,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -36,42 +32,27 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//
-//        System.out.println("i am here");
-//        http.authorizeRequests()
-//                .antMatchers("/register/**", "/login/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .permitAll()
-//                .usernameParameter("username")
-//                .passwordParameter("password")
-//                .defaultSuccessUrl("/", true)
-//                .failureUrl("/pub/error")
-//                .successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
-//                .and()
-//                .exceptionHandling().accessDeniedPage("/pub/error")
-//                .and()
-//                .logout()
-//                .permitAll()
-//                .invalidateHttpSession(true)
-////                .logoutRequestMatcher(new AntPathRequestMatcher("/pub/logout"))
-//                .logoutSuccessUrl("/login").permitAll();
 
         http
-                .authorizeRequests()
-                .antMatchers("/actuator/**", "/register", "/error","/checkexc").permitAll()
-                .anyRequest().authenticated()
+                .authorizeRequests()//check authentication
+                .antMatchers("/actuator/**", "/register", "/error", "/checkexc").permitAll()//do not redirect to login, auth not needed
+                .anyRequest().authenticated()//all other need authentication
                 .and()
-                .formLogin()
-                .loginPage("/pages/usermanagement/login")
+//                .httpBasic()//get user pass from httpbasic
+                .formLogin()//get user pass from form
+                .loginPage("/login")//login url , it needs a controller
                 .permitAll()
+//                .usernameParameter("username")
+//                .passwordParameter("password")
                 .defaultSuccessUrl("/", true)
-                //.failureUrl("/error")
+//                .failureUrl("/error")  or failure handler as bellow
                 .failureHandler(authenticationFailureHandler())
                 .and()
                 .logout()
+                .logoutUrl("/logout") // it is default url for logout, we can change url. , it needs a controller
+               // .logoutSuccessUrl("/usermanagemnt/login") //or logout handler as bellow
+//                .logoutSuccessHandler()
+                .invalidateHttpSession(true)
                 .permitAll()
                 .and()
                 //always use following codes to get detailed error instead of 403:forbidden
@@ -96,4 +77,30 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
+
+    //the following codes are from my travix code:
+    //i get user pass from httpbasic in request and math them with in-memory use-pass
+//    @Value("${app.api.password}")
+//    private String password;
+//
+//    @Value("${app.api.username}")
+//    private String username;
+//
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                .csrf().disable()
+//                .authorizeRequests().anyRequest().authenticated()
+//                .and()
+//                .httpBasic();
+//    }
+//
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth)
+//            throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser(username)
+//                .password("{noop}"+password)
+//                .roles("USER");
+//    }
 }

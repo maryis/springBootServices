@@ -45,7 +45,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String getRegisterPage() {
-        return "registration";
+        return "usermanagement/registration";
     }
     @GetMapping("/checkexc")
     public String chechExceptionHanding() {
@@ -70,7 +70,12 @@ public class UserController {
     @GetMapping("/login")
     public String login() {
         System.out.printf("login get");
-        return "login";
+        return "usermanagement/login";
     }
 
+    @GetMapping("/logout")
+    public String logout() {
+        System.out.printf("logout get");
+        return "usermanagement/login";
+    }
 }

@@ -23,16 +23,19 @@ Date: ${DATE}
         <button value="login" class="btn btn-block " type="submit"  >login</button>
 
         <h1 class="text-center">
-            <p>
-            <a href="/checkexc" >To check Trowing customized error</a>
-            </p>
+
             <p>
             <a href="/register" >Create an account</a>
             </p>
         </h1>
+        <h3 class="text-center">
+            <p>
+            <a href="/checkexc" >To check Trowing customized error</a>
+            </p>
+
+        </h3>
     </form>
 </div>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-
 </body>
 </html>
