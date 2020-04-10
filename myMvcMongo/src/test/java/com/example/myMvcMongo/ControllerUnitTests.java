@@ -65,7 +65,7 @@ public class ControllerUnitTests {
 
         when(userRepository.findAll()).thenReturn(list);
 
-        mockMvc.perform(get("/users/"))
+        mockMvc.perform(get("/mongo/users"))
                 .andDo(print())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].name", is(user1.getName())));
@@ -77,7 +77,7 @@ public class ControllerUnitTests {
 
         Mockito.when(userRepository.save(ArgumentMatchers.any())).thenReturn(user2);
 
-        mockMvc.perform(post("/users/")
+        mockMvc.perform(post("/mongo/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(user2))
                 .accept(MediaType.APPLICATION_JSON))

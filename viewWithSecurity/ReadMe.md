@@ -86,3 +86,18 @@ put(): It creates new resource or update for the given URL using HTTP PUT method
 postForObject(): It creates new resource using HTTP POST method and returns an entity.
 postForLocation(): It creates new resource using HTTP POST method and returns the location of created new resource.
 postForEntity(): It creates news resource using HTTP POST method to the given URI template. It returns ResponseEntity.
+--------------------sprign-jsp form tag library  -----------------------
+<form:form action="/callAcontrollerpath"  modelAttribute="car" method="get"... />  
+<form:input path="name" ...>
+when we want to call this page, we should pass a model with name car
+when we submit this page, 
+if method=get --> then inputs(path) go to action as request parameter
+if method=post --> then inputs(path) go to action as modelattribute
+to read more:
+https://www.javatpoint.com/spring-mvc-form-tag-library
+**note **
+normally we have one button of submit type and the action in form specifys the action should be called (that is value in @Getmapping)
+another way that we use to have multiple submit button in one form:
+- form without action
+- each button have a name
+- @Getmapping (params="button-name")

@@ -12,9 +12,14 @@ Date: ${DATE}
 <head>
     <title>welcome</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
+
 <div class="container">
+
+    <jsp:include page="sections/nav.jsp" ></jsp:include>
+
     <form action="/register" class="form-control">
        <c:if test="${pageContext.request.userPrincipal.name != null}">
            <h2 class="text-center text-danger" type="">
@@ -35,7 +40,5 @@ Date: ${DATE}
        </c:if>
     </form>
 </div>
-<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-
 </body>
 </html>

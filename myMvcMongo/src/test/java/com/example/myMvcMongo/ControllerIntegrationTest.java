@@ -66,7 +66,7 @@ public class ControllerIntegrationTest {
     //when output is single user, to get data use $.name
     @Test
     public void callGetbyId() throws Exception {
-        mockMvc.perform(get("/users/"+user1.getId()))
+        mockMvc.perform(get("/mongo/users/"+user1.getId()))
                 .andDo(print())
                 .andExpect(jsonPath("$.family", CoreMatchers.is("abc1")));
 
@@ -75,7 +75,7 @@ public class ControllerIntegrationTest {
     @Test
     public void call_post() throws Exception {
 
-        mockMvc.perform(post("/users/")
+        mockMvc.perform(post("/mongo/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(user2))
                 .accept(MediaType.APPLICATION_JSON))

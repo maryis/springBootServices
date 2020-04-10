@@ -51,6 +51,16 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.hateoas/spring-hateoas -->
+<!--		Library to support implementing representations for hyper-text driven REST web services.-->
+
+		<dependency>
+			<groupId>org.springframework.hateoas</groupId>
+			<artifactId>spring-hateoas</artifactId>
+			<version>0.25.2.RELEASE</version>
+		</dependency>
+
+
 		<!--HSQLDB (Hyper SQL Database) is a relational database management system written in Java. It has a JDBC driver and supports
 		a large subset of SQL-92, SQL:2008, and SQL:2011 standards.
 		It offers a fast, small (around 1300 kilobytes in version 2.2) database engine which offers both in-memory and disk-based tables.
