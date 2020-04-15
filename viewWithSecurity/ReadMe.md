@@ -101,3 +101,22 @@ another way that we use to have multiple submit button in one form:
 - form without action
 - each button have a name
 - @Getmapping (params="button-name")
+
+------------------------spring-data-redis----------------------------
+redis:Support for extremely large datasets 
+dependency:
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+
+some usages:
+1- use as cache :for example on a controller which get some users(@EnableCaching,@cacheAble,@CachePut,@CacheEvict)
+2- use for session-management(@EnableRedisHttpSession,JedisConnectionFactory,${sessionScope.hitCounter})
+JedisConnectionFactory (using jedis as client to conn to server)  --> it needs spring-session-dependency
+3- use as data-store for short-live data (JedisConnectionFactory, RedisTemplate (redis client))
+4- use as message broker (publish/subscribe on a topic)
+JedisConnectionFactory, RedisTemplate (redis client)
+
+I used spring session (based on redis) in this app : more note on red notebook.
+and I used jedis client to test session manager. remember main app should be up to test 

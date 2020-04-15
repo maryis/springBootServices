@@ -24,6 +24,9 @@
 
         </div>
     </li>
+    <li>
+        ${sessionScope.hitCount}
+    </li>
 
     <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>

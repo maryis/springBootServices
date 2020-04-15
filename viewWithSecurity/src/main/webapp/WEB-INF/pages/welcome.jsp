@@ -24,6 +24,7 @@ Date: ${DATE}
        <c:if test="${pageContext.request.userPrincipal.name != null}">
            <h2 class="text-center text-danger" type="">
                Welcome ${pageContext.request.userPrincipal.name}
+               Welcome ${sessionScope.get("user")}
                <p>
 
                <a href="/getCars"> call oracleMVC- get cars</a>
