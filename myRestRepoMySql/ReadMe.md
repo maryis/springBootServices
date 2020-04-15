@@ -56,5 +56,20 @@ restRepo-production.properties
 to get config files from config server:
 #http://localhost:8888/restRepo/production
 #http://localhost:8888/restRepo/default
+----------------spring -swagger-----------------
+1- add dep
+2- configuration
+3- add annotations :(i did not do these steps forward)
+A Quick Overview of Swagger-Core Annotations
+@Api	Marks a class as a Swagger resource.
+@ApiModel	Provides additional information about Swagger models. (on entity class)
+@ApiModelProperty	Adds and manipulates data of a model property.
+@ApiOperation	Describes an operation or typically an HTTP method against a specific path. (on controller meth)
+@ApiParam	Adds additional meta-data for operation parameters.(bedides controller-meth parameter)
+@ApiResponse	Describes a possible response of an operation.
+@ApiResponses	
+A wrapper to allow a list of multiple ApiResponse objects.
 
-
+4- run
+5- localhost:5050/swagger-ui.html
+**my idea:**  it complicates our code. it is better not to use it and use swagger editors,... to have a swagger doc
