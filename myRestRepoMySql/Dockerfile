@@ -3,6 +3,6 @@
 
 FROM openjdk:8-jdk-alpine
 LABEL maintainer="mary@gmail.com"
-COPY myRestRepoMySql/target/*.jar /app.jar
+COPY target/*.jar /app.jar
 EXPOSE 5050
 ENTRYPOINT ["java","-jar","app.jar"]

@@ -27,7 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @DataJpaTest //it by default use a h2 in-mem db and need h2sql dep in pom. it takes db-properties from test-resources file
-//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)//it disable default behaviour (up line) and use datasource properties in application.properties
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)//it disable default behaviour (up line)
+// and use datasource properties in application.properties
 
 public class MyRepoIntegrationTest {
 
